@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F2F2F0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="1st Japan">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>1st Japan Trip</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <span class="brand">1st Japan Trip</span>
+      <div class="topbar-right">
+        <span class="pill" id="countdown">&nbsp;</span>
+        <button type="button" class="icon-btn" id="theme-btn" aria-label="ธีม อัตโนมัติ">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v16"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="side">
+        <section class="tile hero" aria-labelledby="hero-title">
+          <div class="sun" id="sun" aria-hidden="true"></div>
+          <h1 id="hero-title" class="hero-title">Japan<br>24–28<br><span class="red">Nov.</span></h1>
+          <div class="hero-meta">
+            <div>
+              <span class="label">ROUTE</span>
+              <span class="hero-val" id="hero-route"></span>
+            </div>
+            <div>
+              <span class="label">WHY</span>
+              <span class="hero-val" id="hero-why"></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="tile clock" aria-label="เวลาสองเมือง">
+          <div class="clock-col">
+            <span class="label">BANGKOK</span>
+            <span class="clock-time" id="clock-home">--:--</span>
+          </div>
+          <div class="clock-col">
+            <span class="label">JAPAN <span class="red">+2</span></span>
+            <span class="clock-time" id="clock-jp">--:--</span>
+          </div>
+        </section>
+
+        <div class="tiles" id="tiles"></div>
+
+        <nav class="days" id="days" aria-label="เลือกวัน"></nav>
+      </aside>
+
+      <main class="main">
+        <section class="tile plan" id="plan" aria-live="polite"></section>
+
+        <section class="tile tool" aria-labelledby="fx-title">
+          <span class="label red">YEN → BAHT</span>
+          <h2 id="fx-title" class="tool-title">แปลงเงิน</h2>
+          <div class="fx">
+            <label class="fx-field">
+              <span class="fx-cur">¥</span>
+              <input id="fx-yen" type="number" inputmode="decimal" min="0" step="1" placeholder="0" aria-label="จำนวนเยน">
+            </label>
+            <div class="fx-out" aria-live="polite">
+              <span class="fx-eq">≈</span>
+              <span class="fx-baht" id="fx-baht">฿0</span>
+            </div>
+          </div>
+          <div class="fx-quick" id="fx-quick"></div>
+          <label class="fx-rate">
+            <span>เรท 1 เยน =</span>
+            <input id="fx-rate" type="number" inputmode="decimal" min="0" step="0.001" aria-label="เรทบาทต่อหนึ่งเยน">
+            <span>บาท</span>
+          </label>
+        </section>
+
+        <section class="tile tool" aria-labelledby="phrase-title">
+          <span class="label red">SHOW TO STAFF</span>
+          <h2 id="phrase-title" class="tool-title">ยื่นให้อ่าน</h2>
+          <p class="tool-hint">แตะประโยคแล้วยื่นมือถือให้พนักงานอ่าน</p>
+          <div class="phrases" id="phrases"></div>
+        </section>
+
+        <section class="tile tool" aria-labelledby="stamp-title">
+          <div class="stamp-head">
+            <div>
+              <span class="label red">STAMP BOOK</span>
+              <h2 id="stamp-title" class="tool-title">สมุดตราประทับ</h2>
+            </div>
+            <span class="stamp-count" id="stamp-count">0 / 0</span>
+          </div>
+          <p class="tool-hint">ไปถึงแล้วกดปุ่มตราข้างกิจกรรมเพื่อเก็บตรา กดซ้ำเพื่อยกเลิก</p>
+          <div class="stamps" id="stamps"></div>
+        </section>
+
+        <section class="tile tool" aria-labelledby="check-title">
+          <span class="label red">BEFORE YOU GO</span>
+          <h2 id="check-title" class="tool-title">ของที่ต้องพก</h2>
+          <ul class="checklist" id="checklist"></ul>
+          <div class="emergency" id="emergency"></div>
+        </section>
+
+        <p class="foot">เช็คเวลารถไฟและเวลาเปิดปิดอีกครั้งก่อนออกเดินทาง กด Add to Home Screen เพื่อเปิดแบบออฟไลน์</p>
+      </main>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="ov-ja" hidden>
+    <button type="button" class="ov-close" id="ov-close" aria-label="ปิด">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="ov-body">
+      <p class="ov-ja" id="ov-ja" lang="ja"></p>
+      <p class="ov-ro" id="ov-ro"></p>
+      <p class="ov-th" id="ov-th"></p>
+    </div>
+    <p class="ov-thanks" lang="ja">ありがとうございます</p>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
